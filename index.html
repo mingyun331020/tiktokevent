@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TikTok Pixel Events</title>
+  <script>
+    !function(w, d, t) {
+      w.TiktokAnalyticsObject = t;
+      var tt = w[t] = w[t] || [];
+      tt.methods = ["track", "page", "identify", "instances", "debug", "on", "off", "once", "reset", "alias"];
+      tt.setAndDefer = function(t, e) {
+        t[e] = function() {
+          t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+        }
+      };
+      for (var i = 0; i < tt.methods.length; i++) {
+        tt.setAndDefer(tt, tt.methods[i]);
+      }
+      tt.load = function(e, n) {
+        var i = d.createElement("script");
+        i.type = "text/javascript";
+        i.async = true;
+        i.src = "https://analytics.tiktok.com/i18n/pixel/events.js";
+        var a = d.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(i, a);
+        tt._u = e;
+        tt._t = n;
+      };
+      tt.load('CVOVBMJC77U819HAO0AG', '957a935b87cb55567d67617e72614ac548a7b18b');
+    }(window, document, 'ttq');
+  </script>
+  <script>
+    window.onload = function () {
+      ttq.page();
+    };
+  </script>
+</head>
+<body>
+  <h2>触发 TikTok 像素事件</h2>
+
+  <button onclick="ttq.track('AddToCart', { value: 60, currency: 'USD' }); alert('下单事件已触发');">下单</button>
+  <button onclick="ttq.track('BeginCheckout', { value: 60, currency: 'USD' }); alert('开始结账事件已触发');">开始结账</button>
+  <button onclick="ttq.track('CompletePayment', { value: 60, currency: 'USD' }); alert('支付完成事件已触发');">支付完成</button>
+
+</body>
+</html>
